@@ -1,0 +1,97 @@
+================================================================
+                    COMPILATION ÉTAPE PAR ÉTAPE
+================================================================
+
+ÉTAPE 1 : Se placer dans le dossier framework
+---------------------------------------------
+cd E:\annotation\framework
+
+ÉTAPE 2 : Compiler la classe Java
+----------------------------------
+Option A - Compilation simple dans src:
+javac -cp "..\test\lib\servlet-api.jar" -d src src\MyServlet.java
+
+Option B - Compilation avec dossier de sortie:
+mkdir build
+javac -cp "..\test\lib\servlet-api.jar" -d build src\MyServlet.java
+
+ÉTAPE 3 : Vérifier la compilation
+---------------------------------
+Option A - Si compilation dans src:
+dir src\myframework\*.class
+
+Option B - Si compilation dans build:
+dir /s build
+
+ÉTAPE 4 : Créer le JAR (Option A - depuis src)
+----------------------------------------------
+# Créer le dossier de package si nécessaire
+
+CMD/Batch:
+if not exist "src\myframework" mkdir "src\myframework"
+
+PowerShell:
+if (-not (Test-Path "src\myframework")) { mkdir "src\myframework" }
+
+# Déplacer la classe dans le package
+
+CMD/Batch:
+if exist "src\MyServlet.class" move "src\MyServlet.class" "src\myframework\MyServlet.class"
+
+PowerShell:
+if (Test-Path "src\MyServlet.class") { Move-Item "src\MyServlet.class" "src\myframework\MyServlet.class" }
+
+# Créer le JAR depuis src
+cd src
+jar -cvf ..\myframework.jar myframework\*.class
+cd ..
+
+ÉTAPE 4 : Créer le JAR (Option B - depuis build)
+------------------------------------------------
+cd build
+jar -cvf ..\myframework.jar *
+cd ..
+
+ÉTAPE 5 : Vérifier le contenu du JAR
+------------------------------------
+jar -tf myframework.jar
+
+Le contenu attendu:
+myframework/
+myframework/MyServlet.class
+
+ÉTAPE 6 : Copier le JAR vers test
+---------------------------------
+copy myframework.jar ..\test\lib\myframework.jar
+
+ÉTAPE 7 : Déployer l'application
+--------------------------------
+cd ..\test
+.\deploy.bat
+
+================================================================
+                    COMMANDES RAPIDES
+================================================================
+
+COMPILATION COMPLÈTE (une seule fois):
+--------------------------------------
+cd E:\annotation\framework
+javac -cp "..\test\lib\servlet-api.jar" -d build src\MyServlet.java
+cd build
+jar -cvf ..\myframework.jar *
+cd ..
+copy myframework.jar ..\test\lib\
+cd ..\test
+.\deploy.bat
+
+RECOMPILATION RAPIDE (après changement de code):
+-----------------------------------------------
+cd E:\annotation\framework
+javac -cp "..\test\lib\servlet-api.jar" -d build src\MyServlet.java
+cd build
+jar -cvf ..\myframework.jar *
+cd ..
+copy myframework.jar ..\test\lib\
+cd ..\test
+.\deploy.bat
+
