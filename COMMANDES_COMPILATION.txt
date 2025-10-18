@@ -2,18 +2,18 @@
                     COMPILATION ÉTAPE PAR ÉTAPE
 ================================================================
 
-ÉTAPE 1 : Se placer dans le dossier framework
+ÉTAPE 1 : Se placer dans le dossier Framework
 ---------------------------------------------
-cd E:\annotation\framework
+cd E:\Github\Framework
 
 ÉTAPE 2 : Compiler la classe Java
 ----------------------------------
 Option A - Compilation simple dans src:
-javac -cp "..\test\lib\servlet-api.jar" -d src src\MyServlet.java
+javac -cp "..\framework_test\lib\servlet-api.jar" -d src src\FrontServlet.java
 
 Option B - Compilation avec dossier de sortie:
 mkdir build
-javac -cp "..\test\lib\servlet-api.jar" -d build src\MyServlet.java
+javac -cp "..\framework_test\lib\servlet-api.jar" -d build src\FrontServlet.java
 
 ÉTAPE 3 : Vérifier la compilation
 ---------------------------------
@@ -36,10 +36,10 @@ if (-not (Test-Path "src\myframework")) { mkdir "src\myframework" }
 # Déplacer la classe dans le package
 
 CMD/Batch:
-if exist "src\MyServlet.class" move "src\MyServlet.class" "src\myframework\MyServlet.class"
+if exist "src\FrontServlet.class" move "src\FrontServlet.class" "src\myframework\FrontServlet.class"
 
 PowerShell:
-if (Test-Path "src\MyServlet.class") { Move-Item "src\MyServlet.class" "src\myframework\MyServlet.class" }
+if (Test-Path "src\FrontServlet.class") { Move-Item "src\FrontServlet.class" "src\myframework\FrontServlet.class" }
 
 # Créer le JAR depuis src
 cd src
@@ -58,15 +58,15 @@ jar -tf myframework.jar
 
 Le contenu attendu:
 myframework/
-myframework/MyServlet.class
+myframework/FrontServlet.class
 
-ÉTAPE 6 : Copier le JAR vers test
+ÉTAPE 6 : Copier le JAR vers framework_test
 ---------------------------------
-copy myframework.jar ..\test\lib\myframework.jar
+copy myframework.jar ..\framework_test\lib\myframework.jar
 
 ÉTAPE 7 : Déployer l'application
 --------------------------------
-cd ..\test
+cd ..\framework_test
 .\deploy.bat
 
 ================================================================
@@ -75,23 +75,23 @@ cd ..\test
 
 COMPILATION COMPLÈTE (une seule fois):
 --------------------------------------
-cd E:\annotation\framework
-javac -cp "..\test\lib\servlet-api.jar" -d build src\MyServlet.java
+cd E:\Github\Framework
+javac -cp "..\framework_test\lib\servlet-api.jar" -d build src\FrontServlet.java
 cd build
 jar -cvf ..\myframework.jar *
 cd ..
-copy myframework.jar ..\test\lib\
-cd ..\test
+copy myframework.jar ..\framework_test\lib\
+cd ..\framework_test
 .\deploy.bat
 
 RECOMPILATION RAPIDE (après changement de code):
 -----------------------------------------------
-cd E:\annotation\framework
-javac -cp "..\test\lib\servlet-api.jar" -d build src\MyServlet.java
+cd E:\Github\Framework
+javac -cp "..\framework_test\lib\servlet-api.jar" -d build src\FrontServlet.java
 cd build
 jar -cvf ..\myframework.jar *
 cd ..
-copy myframework.jar ..\test\lib\
-cd ..\test
+copy myframework.jar ..\framework_test\lib\
+cd ..\framework_test
 .\deploy.bat
 

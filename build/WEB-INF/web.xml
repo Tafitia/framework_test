@@ -8,13 +8,16 @@
     <!-- Nom du projet -->
     <display-name>TestFramework</display-name>
 
+    <!-- Front Controller du framework -->
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>test.TestServlet</servlet-class>
+        <servlet-name>FrontServlet</servlet-name>
+        <servlet-class>myframework.FrontServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-    
+
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/essai</url-pattern>
+        <servlet-name>FrontServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
 </web-app>
