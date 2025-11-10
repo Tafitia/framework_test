@@ -6,12 +6,29 @@ import myframework.UrlAnnotation;
 @Controller
 public class Test2Controller {
     @UrlAnnotation(url = "/hello")
-    public void hello() {
-        // ...
+    public String hello() {
+        return """
+            <!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Test Page</title>
+            </head>
+            <body>
+                <h1>HELLO Coucou</h1>
+            </body>
+            </html>
+            """;
     }
 
     @UrlAnnotation(url = "/test")
     public void test() {
         // ...
+    }
+
+    @UrlAnnotation(url = "/data")
+    public double data() {
+        return 18;
     }
 }
