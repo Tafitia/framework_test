@@ -2,6 +2,7 @@ package test;
 
 import myframework.Controller;
 import myframework.UrlAnnotation;
+import myframework.ModelView;
 
 @Controller
 public class Test2Controller {
@@ -23,8 +24,10 @@ public class Test2Controller {
     }
 
     @UrlAnnotation(url = "/test")
-    public void test() {
-        // ...
+    public ModelView test() {
+        ModelView mv = new ModelView();
+        mv.setView("test.jsp");
+        return mv;
     }
 
     @UrlAnnotation(url = "/data")
