@@ -27,6 +27,8 @@ public class Test2Controller {
     public ModelView test() {
         ModelView mv = new ModelView();
         mv.setView("test.jsp");
+        String[] persons = { "Iratra", "Tafita", "Itia" };
+        mv.addAttributes("persons", persons);
         return mv;
     }
 
