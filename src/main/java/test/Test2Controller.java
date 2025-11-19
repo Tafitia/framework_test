@@ -36,4 +36,9 @@ public class Test2Controller {
     public double data() {
         return 18;
     }
+
+    @UrlAnnotation(url = "/tests/{id}")
+    public String get() {
+        return "Test ID trouvé!";
+    }
 }
