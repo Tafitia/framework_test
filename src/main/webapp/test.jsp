@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Test JSP Page</h1>
+    <h1>Test Page</h1>
     <ul>
         <% 
             String[] persons = (String[]) request.getAttribute("persons");

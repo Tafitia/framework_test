@@ -41,4 +41,24 @@ public class Test2Controller {
     public String get() {
         return "Test ID trouvé!";
     }
+
+    @UrlAnnotation(url = "/form-test")
+    public String formTest(int id, String name) {
+        return """
+            <!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <title>Form Test</title>
+            </head>
+            <body>
+                <h1>Resultat du formulaire</h1>
+                <p>ID : """ + id + """
+                </p>
+                <p>Nom : """ + (name != null ? name : "null") + """
+                </p>
+            </body>
+            </html>
+            """;
+    }
 }
