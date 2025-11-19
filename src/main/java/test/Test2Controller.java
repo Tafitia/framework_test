@@ -3,6 +3,7 @@ package test;
 import myframework.Controller;
 import myframework.UrlAnnotation;
 import myframework.ModelView;
+import myframework.*;
 
 @Controller
 public class Test2Controller {
@@ -43,7 +44,7 @@ public class Test2Controller {
     }
 
     @UrlAnnotation(url = "/form-test")
-    public String formTest(int id, String name) {
+    public String formTest(@RequestParam("name") String param, int id, String name) {
         return """
             <!DOCTYPE html>
             <html lang="fr">
@@ -55,7 +56,9 @@ public class Test2Controller {
                 <h1>Resultat du formulaire</h1>
                 <p>ID : """ + id + """
                 </p>
-                <p>Nom : """ + (name != null ? name : "null") + """
+                <p>Nom : """ + name + """
+                </p>
+                <p>param : """ + param + """
                 </p>
             </body>
             </html>
