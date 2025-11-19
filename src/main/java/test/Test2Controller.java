@@ -39,8 +39,8 @@ public class Test2Controller {
     }
 
     @UrlAnnotation(url = "/tests/{id}")
-    public String get() {
-        return "Test ID trouvé!";
+    public String get(String id) {
+        return "Test ID trouvé!" + id;
     }
 
     @UrlAnnotation(url = "/form-test")
