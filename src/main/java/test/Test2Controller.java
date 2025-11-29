@@ -1,8 +1,5 @@
 package test;
 
-import myframework.Controller;
-import myframework.UrlAnnotation;
-import myframework.ModelView;
 import myframework.*;
 
 @Controller
@@ -44,6 +41,7 @@ public class Test2Controller {
     }
 
     @UrlAnnotation(url = "/form-test")
+    @RequestMapping("POST")
     public String formTest(@RequestParam("name") String param, int id, String name) {
         return """
             <!DOCTYPE html>
@@ -63,5 +61,22 @@ public class Test2Controller {
             </body>
             </html>
             """;
+    }
+
+   @UrlAnnotation(url = "/formulaire")
+   @RequestMapping("GET")
+    public ModelView afficherFormulaire() {
+        ModelView mv = new ModelView();
+        mv.setView("simple-form.jsp"); 
+        return mv;
+    }
+
+   @UrlAnnotation(url = "/formulaire")
+    @RequestMapping("POST")
+    public ModelView traiterFormulaire(String nom) {
+        ModelView mv = new ModelView();
+        mv.setView("simple-result.jsp");
+        mv.addAttributes("leNom", nom); 
+        return mv;
     }
 }
