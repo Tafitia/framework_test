@@ -51,7 +51,7 @@
 <body>
     <h1>Test d'injection de parametres</h1>
 
-    <form action="form-test" method="GET">
+    <form action="form-test" method="POST">
         <label for="id">ID (int):</label>
         <input type="number" id="id" name="id" value="123" required>
         
@@ -62,7 +62,7 @@
     </form>
 
     <h2>Test avec parametre manquant</h2>
-    <form action="form-test" method="GET">
+    <form action="form-test" method="POST">
         <label for="id2">ID uniquement:</label>
         <input type="number" id="id2" name="id" value="456" required>
         
