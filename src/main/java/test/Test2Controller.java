@@ -1,6 +1,8 @@
 package test;
 
 import myframework.*;
+import java.util.Map;
+import java.util.HashMap;
 
 @Controller
 public class Test2Controller {
@@ -78,5 +80,39 @@ public class Test2Controller {
         mv.setView("simple-result.jsp");
         mv.addAttributes("leNom", nom); 
         return mv;
+    }
+
+    @UrlAnnotation(url = "/info")
+    @RequestMapping("GET")
+    public ModelView formInfo() {
+        ModelView mv = new ModelView();
+        mv.setView("infos.jsp");
+        return mv;
+    }
+
+    @UrlAnnotation(url = "/info")
+    @RequestMapping("POST")
+    public String traiterInfos(Map<String, Object[]> data) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<!DOCTYPE html><html><body>");
+        sb.append("<h2>Résultats du formulaire</h2>");
+
+        for (Map.Entry<String, Object[]> entry : data.entrySet()) {
+            sb.append("<p><strong>").append(entry.getKey()).append("</strong> : ");
+            Object[] values = entry.getValue();
+            if (values != null) {
+                for (int i = 0; i < values.length; i++) {
+                    Object val = values[i];
+                    sb.append(val);
+                    if (i < values.length - 1) sb.append(", ");
+                }
+            } else {
+                sb.append("null");
+            }
+            sb.append("</p>");
+        }
+
+        sb.append("</body></html>");
+        return sb.toString();
     }
 }
