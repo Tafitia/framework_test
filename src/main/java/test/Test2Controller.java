@@ -1,8 +1,11 @@
 package test;
 
 import myframework.*;
+import util.Employe;
+import util.Departement;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class Test2Controller {
@@ -112,6 +115,43 @@ public class Test2Controller {
             sb.append("</p>");
         }
 
+        sb.append("</body></html>");
+        return sb.toString();
+    }
+
+    @UrlAnnotation(url = "/form-emp")
+    @RequestMapping("GET")
+    public ModelView formEmploye() {
+        ModelView mv = new ModelView();
+        mv.setView("emp-form.jsp");
+        return mv;
+    }
+
+    @UrlAnnotation(url = "/form-emp")
+    @RequestMapping("POST")
+    public String handleDepartementForm(Departement d, Employe[] liste) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<!DOCTYPE html><html><head><meta charset='UTF-8'></head><body>");
+        sb.append("<h2>Details du Departement soumis</h2>");
+        sb.append("<p><strong>ID Dept :</strong> ").append(d.getId()).append("</p>");
+        sb.append("<p><strong>Nom Dept :</strong> ").append(d.getNom()).append("</p>");
+        sb.append("<h3>Liste des employes :</h3>");
+        
+        if (liste != null && liste.length > 0) {
+            sb.append("<ul>");
+            for (int i = 0; i < liste.length; i++) {
+                Employe emp = liste[i];
+                sb.append("<li>")
+                  .append("Index ").append(i).append(" : ")
+                  .append(emp.getNom())
+                  .append(" (ID: ").append(emp.getId()).append(")")
+                  .append("</li>");
+            }
+            sb.append("</ul>");
+        } else {
+            sb.append("<p>Aucun employé soumis.</p>");
+        }
+        sb.append("<br><a href='form-dept'>Retour</a>");
         sb.append("</body></html>");
         return sb.toString();
     }
