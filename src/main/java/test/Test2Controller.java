@@ -4,6 +4,7 @@ import myframework.*;
 import util.Employe;
 import util.Departement;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -154,5 +155,36 @@ public class Test2Controller {
         sb.append("<br><a href='form-dept'>Retour</a>");
         sb.append("</body></html>");
         return sb.toString();
+    }
+
+    @UrlAnnotation(url = "/api/employes")
+    @Json
+    @RequestMapping("GET")
+    public List<Employe> apiList() {
+        List<Employe> liste = new ArrayList<>();
+        
+        Departement dep = new Departement("D1", "IT", null);
+        
+        Employe e1 = new Employe();
+        e1.setId("1"); e1.setNom("Jean"); e1.setDepartement(dep);
+        
+        Employe e2 = new Employe();
+        e2.setId("2"); e2.setNom("Paul"); e2.setDepartement(dep);
+        
+        liste.add(e1);
+        liste.add(e2);
+        
+        return liste;
+    }
+
+    // TEST 2 : OBJET UNIQUE -> Renvoie { data: { ... } } (Pas de count)
+    @UrlAnnotation(url = "/api/employe-seul")
+    @Json
+    @RequestMapping("GET")
+    public Employe apiOne() {
+        Employe e = new Employe();
+        e.setId("99");
+        e.setNom("Super Admin");
+        return e;
     }
 }
