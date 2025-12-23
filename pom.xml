@@ -40,6 +40,15 @@
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
         </dependency>
+            
+        <!-- Jackson (Nécessaire car le framework l'utilise) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
+  
     </dependencies>
 
     <build>
