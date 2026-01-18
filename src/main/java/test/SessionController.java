@@ -21,6 +21,12 @@ public class SessionController {
         session.add("user_nom", nom);
         session.add("user_email", email);
 
+        if ("Tita".equalsIgnoreCase(nom)) {
+            session.add("user_role", "manager");
+        } else {
+            session.add("user_role", "user");
+        }
+
         ModelView mv = new ModelView();
         mv.setView("profile.jsp");
 
@@ -30,6 +36,7 @@ public class SessionController {
         return mv;
     }
 
+    @Auth("")
     @UrlAnnotation(url = "/profile")
     @RequestMapping("GET")
     public ModelView profil(SessionUtil session) {
@@ -48,6 +55,13 @@ public class SessionController {
         }
         
         return mv;
+    }
+
+    @Auth("manager")
+    @UrlAnnotation(url = "/admin")
+    @RequestMapping("GET")
+    public String pageAdmin() {
+        return "<h1>Espace admin</h1> <p>Si vous voyez ça, c'est que vous avez le rôle 'manager'.</p>";
     }
 
     @UrlAnnotation(url = "/logout")
